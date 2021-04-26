@@ -1,5 +1,6 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
+import path from 'path';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
@@ -17,10 +18,15 @@ const uri = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.e
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, '/../client/build')));
 
 app.use('/api/user', userRouter);
 app.use('/api/place', placeRouter);
 
 app.use(errorMiddleware);
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 connect(uri)
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
