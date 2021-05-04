@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import ListWindow from '../../common/listWindow';
 import { renderStatusEffect } from '../../common/inputWLabel';
 import { placeReducerName, fetchAllPlaces } from '../createPlace/placeSlice';
 import { addPlace, userReducerName, fetchPlaces } from '../login/userSlice';
@@ -9,35 +10,48 @@ import { addPlace, userReducerName, fetchPlaces } from '../login/userSlice';
 function UserPlace() {
 
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [filteredPlaces, setFilteredPlaces] = useState([]);
+  const [isSearchEmpty, setIsSearchEmpty] = useState(true);
+
   const { places, status } = useSelector( state => state[placeReducerName] );
   const { requestSuccess, places: userPlaces } = useSelector( state => state[userReducerName] );
   const dispatch = useDispatch();
+
   useEffect( () => {
     dispatch(fetchAllPlaces());
     dispatch(fetchPlaces());
   },[]);
 
+  
   const addSelectedPlace = () => {
     if (selectedPlace)
       dispatch(addPlace(selectedPlace));
   };
-  
+
+  const filterPlaces = ({ target }) => {
+    const { value: input } = target;
+
+    if( !input ) {
+      setFilteredPlaces([]);
+      setIsSearchEmpty(true);
+    }
+    else{
+      setFilteredPlaces( userPlaces.filter( (place) => place.name.includes(input)) );
+      if( isSearchEmpty )
+        setIsSearchEmpty(false);
+    }
+  };  
+
   return (
     <div className="wrapper">
       <div className="form-container">
         <Link to="/place/create">
           <button>Go To Create Place</button>
         </Link>
-        <div className="row-baseline">
-          <p>You saved places:</p>
-          <select onChange={ (e) => setSelectedPlace(e.target.value) }>
-            { userPlaces.map( (userPlace) => (
-              <option key={userPlace._id} value={userPlace._id}>
-                { userPlace.name }
-              </option>
-            ))
-            }
-          </select>
+        <div>
+          <p>Your Saved places</p>
+          <input type="text" placeholder="Search" onChange={filterPlaces} />
+          <ListWindow listOfItems={ isSearchEmpty ? userPlaces: filteredPlaces } />
         </div>
         <div className="row-baseline">
           <p>All places:</p>

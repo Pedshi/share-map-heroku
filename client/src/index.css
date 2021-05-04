@@ -33,6 +33,28 @@ input[type=submit]{
   background-color: #D07C49;
 }
 
+ul{
+  padding: 0;
+  margin: 0;
+}
+
+li{
+  list-style-type: none;
+  line-height: 24px;
+}
+
+.user-place-window li:nth-child(odd){
+  background-color: #fafafa;
+}
+
+.user-place-window li:nth-child(even){
+  background-color: beige;
+}
+
+.text-center{
+  text-align: center;
+}
+
 .wrapper{
   height: 100vh;
   display: flex;
@@ -97,4 +119,10 @@ input[type=submit]{
   display: flex;
   flex-direction: row;
   align-items: baseline;
+}
+
+.user-place-window{
+  height: 150px;
+  overflow: auto;
+  background-color: #fafafa;
 }
