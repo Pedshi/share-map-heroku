@@ -19,18 +19,18 @@ async function login( {email, password}:CreateQuery<IUser> ): Promise<string> {
           .catch( (error: Error) => { throw error });
 };
 
-async function addPlace(id: string, placeId: string): Promise<IUser | null> {
-  return User.findOneAndUpdate(
-            {_id : id},
-            { '$addToSet': {places: [placeId] as any } },
-            {'upsert': true}
-         )
-          .then( (data: IUser | null) => data )
-          .catch( (error: Error) => { throw error; } );
+async function addPlaces(userId: string, placeIds: string[]) {
+ return User.findOneAndUpdate(
+          { _id: userId },
+          { '$addToSet': { places: placeIds as any} },
+          { 'upsert': true }
+        )
+        .then( (data: IUser | null) => data )
+        .catch( (error: Error) => { throw error } );
 };
 
 async function getPlaces(id: string): Promise<Types.ObjectId[] | IPlace[] | undefined> {
-  return User.findOne({_id: id})
+  return User.findOne({ _id: id })
           .populate('places').exec()
           .then( (data: IUser | null) => { return data!.places} )
           .catch( (error: Error) => { throw error } );
@@ -39,6 +39,6 @@ async function getPlaces(id: string): Promise<Types.ObjectId[] | IPlace[] | unde
 export default {
   createUser,
   login,
-  addPlace,
+  addPlaces,
   getPlaces
 };

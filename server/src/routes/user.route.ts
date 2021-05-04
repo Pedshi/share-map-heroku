@@ -9,10 +9,11 @@ enum UserPaths {
   signUp = '/signup',
   login = '/login',
   authenticateToken = '/auth',
-  addPlace = '/place/:placeId',
+  addPlaces = '/place',
   getPlaces = '/place'
 }
 
+// Sign up
 const signUpCB = async (req: Request, res: Response, next: NextFunction) => {
   try{
     const user = await UserController.createUser(req);
@@ -27,6 +28,7 @@ const signUpCB = async (req: Request, res: Response, next: NextFunction) => {
 
 userRouter.post(UserPaths.signUp, signUpCB);
 
+// Login
 const loginCB = async (req: Request, res: Response, next: NextFunction) => {
   const {email, password} = req.body;
   if( !email || !password)
@@ -39,6 +41,7 @@ const loginCB = async (req: Request, res: Response, next: NextFunction) => {
 
 userRouter.post(UserPaths.login, loginCB);
 
+// Authenticate Token
 const authenticateTokenCB = async (req: Request<authMiddlewareParams>, res: Response, next: NextFunction) => {
   if( req.params.user.email )
     return res.sendStatus(200);
@@ -47,21 +50,22 @@ const authenticateTokenCB = async (req: Request<authMiddlewareParams>, res: Resp
 
 userRouter.post(UserPaths.authenticateToken, authenticateUserToken , authenticateTokenCB);
 
-interface addPlaceParams extends authMiddlewareParams{
-  placeId: string;
-}
-
-const addPlaceCB = async (req: Request<addPlaceParams>, res: Response, next: NextFunction) => {
+// Add Places
+const addPlaces = async (req: Request<authMiddlewareParams>, res: Response, next: NextFunction) => {
+  const { places: placeIDs } = req.body;
+  if (!placeIDs)
+    return next(new Error('Empty fields'));
   try{
-    const user = await UserController.addPlace(req.params.user.id, req.params.placeId);
+    const user = await UserController.addPlaces(req.params.user.id, placeIDs);
     if(!user)
       return res.status(404).send('User does not exist');
     return res.sendStatus(200);
   }catch(error) { next(error) }
 };
 
-userRouter.put(UserPaths.addPlace, authenticateUserToken, addPlaceCB);
+userRouter.put(UserPaths.addPlaces, authenticateUserToken, addPlaces);
 
+// Get Places
 const getPlacesCB = async (req: Request<authMiddlewareParams>, res: Response, next: NextFunction) => {
   try{
     const places = await UserController.getPlaces(req.params.user.id!);
@@ -72,5 +76,6 @@ const getPlacesCB = async (req: Request<authMiddlewareParams>, res: Response, ne
 };
 
 userRouter.get(UserPaths.getPlaces, authenticateUserToken, getPlacesCB);
+
 
 export default userRouter
