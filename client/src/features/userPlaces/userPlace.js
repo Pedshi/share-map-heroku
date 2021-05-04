@@ -36,7 +36,9 @@ function UserPlace() {
       setIsSearchEmpty(true);
     }
     else{
-      setFilteredPlaces( userPlaces.filter( (place) => place.name.includes(input)) );
+      setFilteredPlaces( userPlaces.filter( 
+        (place) => place.name.toLowerCase().includes( input.toLowerCase() )
+      ));
       if( isSearchEmpty )
         setIsSearchEmpty(false);
     }
