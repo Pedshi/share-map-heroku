@@ -4,7 +4,7 @@ import axios from 'axios';
 export const userReducerName = 'user';
 
 const LOGIN = userReducerName + '/login';
-const ADD_PLACE = userReducerName + '/addPlace';
+const ADD_PLACES = userReducerName + '/addPlaces';
 const GET_PLACES = userReducerName + '/getPlaces';
 
 const initialState = {
@@ -25,11 +25,11 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const addPlace = createAsyncThunk(
-  ADD_PLACE,
-  async (placeId) => {
+export const addPlaces = createAsyncThunk(
+  ADD_PLACES,
+  async (places) => {
     try{
-      await axios.put('/api/user/place/' + placeId);
+      await axios.put('/api/user/place/', places);
       return {};
     }catch(error) { throw error; }
   }
@@ -60,11 +60,11 @@ const userSlice = createSlice({
         state.error = error.message;
         state.status = 'rejected';
       })
-      .addCase(addPlace.fulfilled, (state) => {
+      .addCase(addPlaces.fulfilled, (state) => {
         state.status = 'idle';
         state.requestSuccess = true;
       })
-      .addCase(addPlace.rejected, (state, { error }) => {
+      .addCase(addPlaces.rejected, (state, { error }) => {
         state.error = error.message;
         state.status = 'rejected';
       })
@@ -76,7 +76,7 @@ const userSlice = createSlice({
         state.error = error.message;
         state.status = 'rejected';
       })
-      .addMatcher(isAnyOf (loginUser.pending, addPlace.pending), (state) => {
+      .addMatcher(isAnyOf (loginUser.pending, addPlaces.pending), (state) => {
         state.status = 'loading';
         state.requestSuccess = false;
       })

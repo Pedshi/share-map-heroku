@@ -43,6 +43,10 @@ li{
   line-height: 24px;
 }
 
+.h150{
+  height: 150px;
+}
+
 .user-place-window li:nth-child(odd){
   background-color: #fafafa;
 }
@@ -53,6 +57,11 @@ li{
 
 .text-center{
   text-align: center;
+}
+
+.flex-end{
+  display: flex;
+  align-items: flex-end;
 }
 
 .wrapper{
