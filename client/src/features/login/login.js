@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, userReducerName } from './userSlice';
+import { loginUser, authReducerName } from './authSlice';
 import { Redirect } from 'react-router-dom';
-import { renderStatusEffect } from '../../common/inputWLabel';
+import { renderStatusEffect } from '../../common';
 
 function Login() {
 
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
-  const { authenticated, status } = useSelector(state => state[userReducerName]);
+  const { authenticated, status } = useSelector(state => state[authReducerName]);
   const dispatch = useDispatch();
   
   const onSubmitHandler = (event) => {

@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-import  InputWLabel, { renderStatusEffect } from '../../common/inputWLabel';
-import { createPlace, placeReducerName } from './placeSlice';
-
+import { InputWLabel, renderStatusEffect } from '../../common';
+import useCreatePlace from './useCreatePlace';
 
 const categoryOptions = [
   {label: "Bar",        value: 1},
@@ -15,7 +13,8 @@ const categoryOptions = [
 
 function Place() {
 
-  const { status, place } = useSelector(state => state[placeReducerName]);  
+  const [createPlaceState, createPlace] = useCreatePlace();
+  const { status, createdPlace } = createPlaceState;
 
   const [placeName, setPlaceName] = useState('');
   const [address, setAddress] = useState('');
@@ -52,7 +51,7 @@ function Place() {
       openingHours,
       category
     };
-    dispatch(createPlace(place));
+    createPlace(place);
   };
 
   return (
@@ -86,7 +85,7 @@ function Place() {
           <input type="submit" value="Create Place"/>
         </form>
         { renderStatusEffect(status, 'Unable to save place!') }
-        {place && (
+        {createdPlace && (
           <div>
             <p>Succefully saved {placeName}</p>
           </div>

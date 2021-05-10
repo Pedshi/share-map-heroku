@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-import { authReducerName, authenticateUser } from '../features/login/authSlice';
-import { renderStatusEffect } from '../common/inputWLabel';
+import { authReducerName, authenticateUser } from '../features/login';
+import { renderStatusEffect } from './';
 
 function PrivateRouter({ children }){
   

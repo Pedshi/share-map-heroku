@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import ListWindow from '../../common/listWindow';
-import { renderStatusEffect } from '../../common/inputWLabel';
-import { placeReducerName, fetchAllPlaces } from '../createPlace/placeSlice';
-import { addPlaces, userReducerName, fetchPlaces } from '../login/userSlice';
+import { ListWindow, renderStatusEffect } from '../../common';
+import {  addPlaces, 
+          userReducerName, 
+          fetchPlaces,
+          placeReducerName, 
+          fetchAllPlaces } from './';
 
 function UserPlace() {
 
@@ -17,7 +19,6 @@ function UserPlace() {
   const { requestSuccess, places: userPlaces } = useSelector( state => state[userReducerName] );
   const dispatch = useDispatch();
 
-  // This needs to be moved up so that when you enter site through any url this should happen
   useEffect( () => {
     dispatch(fetchAllPlaces());
     dispatch(fetchPlaces());
