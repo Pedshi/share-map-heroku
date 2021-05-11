@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { InputWLabel, renderStatusEffect } from '../../common';
-import useCreatePlace from './useCreatePlace';
+import { InputWLabel, renderStatusEffect } from '../../../common';
+import useCreatePlace from '../hooks/useCreatePlace';
 
 const categoryOptions = [
   {label: "Bar",        value: 1},

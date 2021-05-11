@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { authReducer } from '../features/login';
 import { placeReducer, userReducer } from '../features/userPlaces';
 
-const store = configureStore({
+const makeStore = () => configureStore({
   reducer: {
     authentication: authReducer,
     place: placeReducer,
@@ -10,4 +10,4 @@ const store = configureStore({
   }
 });
 
-export default store;
+export default makeStore;

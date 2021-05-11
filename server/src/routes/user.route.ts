@@ -43,6 +43,7 @@ userRouter.post(UserPaths.login, loginCB);
 
 // Authenticate Token
 const authenticateTokenCB = async (req: Request<authMiddlewareParams>, res: Response, next: NextFunction) => {
+  console.log('CALLED');
   if( req.params.user.email )
     return res.sendStatus(200);
   next( new Error('Not authorized') );

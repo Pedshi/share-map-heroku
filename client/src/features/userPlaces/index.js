@@ -1,8 +1,8 @@
-export { default } from './userPlace';
+export { default } from './components/userPlace';
 export { default as placeReducer,
         fetchAllPlaces, 
-        placeReducerName } from './placeSlice';
+        placeReducerName } from './slices/placeSlice';
 export { default as userReducer, 
          addPlaces, 
          fetchPlaces,
-         userReducerName } from './userSlice';
+         userReducerName } from './slices/userSlice';

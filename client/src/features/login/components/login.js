@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, authReducerName } from './authSlice';
+import { loginUser, authReducerName } from '../';
 import { Redirect } from 'react-router-dom';
-import { renderStatusEffect } from '../../common';
+import { renderStatusEffect } from '../../../common';
 
 function Login() {
 

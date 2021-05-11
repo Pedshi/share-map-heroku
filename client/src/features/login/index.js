@@ -1,5 +1,5 @@
-export { default } from './login';
+export { default } from './components/login';
 export {  default as authReducer, 
           authenticateUser, 
           loginUser, 
-          authReducerName } from './authSlice';
+          authReducerName } from './slices/authSlice';

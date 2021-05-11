@@ -6,9 +6,6 @@
   "dependencies": {
     "@babel/core": "7.13.16",
     "@reduxjs/toolkit": "1.5.1",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "axios": "0.21.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -21,8 +18,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +43,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "7.13.15",
+    "@testing-library/jest-dom": "5.12.0",
+    "@testing-library/react": "11.2.6",
+    "babel-jest": "26.6.3",
+    "redux-mock-store": "1.5.4"
   }
 }

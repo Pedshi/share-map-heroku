@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { ListWindow, renderStatusEffect } from '../../common';
+import { ListWindow, renderStatusEffect } from '../../../common';
 import {  addPlaces, 
           userReducerName, 
           fetchPlaces,
           placeReducerName, 
-          fetchAllPlaces } from './';
+          fetchAllPlaces } from '..';
 
 function UserPlace() {
 
