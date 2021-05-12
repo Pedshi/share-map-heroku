@@ -1,11 +1,9 @@
 import React from 'react';
-import makeStore from '../../app/store';
+import { render } from '@testing-library/react';
 import { BrowserRouter, Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PrivateRoute } from '../';
-import { render, screen } from '@testing-library/react';
-import { authenticateUser } from '../../features/login';
-import { createMemoryHistory } from 'history';
+import makeStore from '../../app/store';
 
 const privateRoute = (children, store, history) => {
   const privateRouteComp = (<PrivateRoute> { children } </PrivateRoute>);
@@ -20,9 +18,16 @@ const privateRoute = (children, store, history) => {
   return renderScene;
 };
 
-describe('Private Route', () => {
-  const testId = 'mock-comp';
-  const mockChild = ( <div data-testid={testId} /> );
+const authenticateUserReturnValue = { type: '' };
+jest.mock('../../features/login/slices/authSlice', () => {
+  return {
+    __esModule: true,
+    ...jest.requireActual('../../features/login/slices/authSlice'),
+    authenticateUser:  () => { return authenticateUserReturnValue }
+  };
+});
+
+describe('Private Route Dispatch', () => {
 
   const storeWithSpy = () => {
     const store = makeStore();
@@ -30,23 +35,11 @@ describe('Private Route', () => {
     store.dispatch = jest.fn(originalDispatch);
     return store;
   };
-
-  test('should view child', () => {
+  test('should dispatch authenticate user', () => {
     const store = storeWithSpy();
-    store.dispatch(authenticateUser.fulfilled());
+    const d = (<div/>)
+    render(privateRoute(d, store));
 
-    render(privateRoute(mockChild, store));
-
-    expect(screen.getByTestId(testId)).toBeInTheDocument();
-  });
-
-  test('should not view child', () => {
-    const history = createMemoryHistory();
-    const route = '/private-route';
-    history.push(route);
-
-    render(privateRoute(mockChild, makeStore(), history));
-
-    expect(history.location.pathname).toBe('/');
+    expect(store.dispatch).toHaveBeenCalledWith(authenticateUserReturnValue);
   });
 });
