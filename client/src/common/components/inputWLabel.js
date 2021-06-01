@@ -1,13 +1,14 @@
 import React from 'react';
 
-function InputWLabel(props) {
+function InputWLabel({ labelText, value, onValueChange }) {
 
   return (
     <div className="input-txt-with-label">
-      <label>{props.labelText}*</label>
+      <label htmlFor={labelText}>{labelText}*</label>
       <input type="text" 
-        value={props.value} 
-        onChange={e => props.onValueChange(e.target.value)}  required/>
+        id={labelText}
+        value={value} 
+        onChange={e => onValueChange(e.target.value)}  required/>
     </div>
   );
 }

@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { InputWLabel, renderStatusEffect } from '../../../common';
 import useCreatePlace from '../hooks/useCreatePlace';
@@ -31,7 +30,6 @@ function Place() {
     sat: '',
     sun: ''
   });
-  const dispatch = useDispatch();
 
   const updateOpeningHours = (name) => (value) => {
     setOpeningHours({
