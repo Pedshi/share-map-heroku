@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { InputWLabel, renderStatusEffect } from '../../../common';
 import useCreatePlace from '../hooks/useCreatePlace';
+import '../styles/_createPlace.scss';
 
 const categoryOptions = [
   {label: "Bar",        value: 1},
@@ -53,41 +54,48 @@ function Place() {
   };
 
   return (
-    <div className="wrapper-admin">
-      <div className="form-container">
-        <Link to="/place/user">
-          <button>Go To My Places</button>
-        </Link>
-        <form onSubmit={onSubmitHandler}>
-          <InputWLabel labelText="Name of Place" value={placeName}  onValueChange={setPlaceName}/>
-          <br/>
-          <InputWLabel labelText="Address" value={address} onValueChange={setAddress}/>
-          <InputWLabel labelText="Latitude" value={latitude} onValueChange={setLatitude} />
-          <InputWLabel labelText="Longitude" value={longitude} onValueChange={setLongitude} />
-          <br/>
-          <InputWLabel labelText="Instagram Location Tag Url" value={igLocationUrl} onValueChange={setIgLocationUrl} />
-          <br/>
-          <select onChange={e => setCategory(parseInt(e.target.value))}>
-            {categoryOptions.map( (category) => (
-                <option key={category.value} value={category.value}>
-                  { category.label }
-                </option>
-              )
-            )}
-          </select>
-          {Object.keys(openingHours).map( (key) => (
-            <InputWLabel key={key} labelText={key} value={openingHours[key]} onValueChange={updateOpeningHours(key)} />
-            ) 
+    <div className="create-place">
+      <div className="create-place__form-container">
+        <div className="create-place__card">
+          <Link to="/place/user">
+            <button>Go To My Places</button>
+          </Link>
+          <form onSubmit={onSubmitHandler}>
+            <div className="create-place__row">
+              <InputWLabel labelText="Name of Place" value={placeName}  onValueChange={setPlaceName}/>
+              <InputWLabel labelText="Address" value={address} onValueChange={setAddress}/>
+            </div>
+            <div className="create-place__row">
+              <InputWLabel labelText="Latitude" value={latitude} onValueChange={setLatitude} />
+              <InputWLabel labelText="Longitude" value={longitude} onValueChange={setLongitude} />
+            </div>
+            <div className="create-place__row">
+            <InputWLabel labelText="Instagram Location Tag Url" value={igLocationUrl} onValueChange={setIgLocationUrl} />
+            <select onChange={e => setCategory(parseInt(e.target.value))}>
+              {categoryOptions.map( (category) => (
+                  <option key={category.value} value={category.value}>
+                    { category.label }
+                  </option>
+                )
+              )}
+            </select>
+            </div>
+            <div className="create-place__open-time">
+              {Object.keys(openingHours).map( (key) => (
+                <InputWLabel key={key} labelText={key} value={openingHours[key]} onValueChange={updateOpeningHours(key)} />
+                ) 
+              )}
+            </div>
+            <br/>
+            <input type="submit" value="Create Place"/>
+          </form>
+          { renderStatusEffect(status, 'Unable to save place!') }
+          {createdPlace && (
+            <div>
+              <p>Succefully saved {placeName}</p>
+            </div>
           )}
-          <br/>
-          <input type="submit" value="Create Place"/>
-        </form>
-        { renderStatusEffect(status, 'Unable to save place!') }
-        {createdPlace && (
-          <div>
-            <p>Succefully saved {placeName}</p>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );

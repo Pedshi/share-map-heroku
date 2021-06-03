@@ -5,6 +5,7 @@ function InputWLabel({ labelText, value, onValueChange }) {
   return (
     <div className="input-txt-with-label">
       <label htmlFor={labelText}>{labelText}*</label>
+      <br/>
       <input type="text" 
         id={labelText}
         value={value} 
