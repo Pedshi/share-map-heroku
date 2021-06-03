@@ -1,0 +1,28 @@
+
+.login{
+  display: flex;
+  height: 100vh;
+
+  &__first-col{
+    width: 544px;
+    padding: 80px 48px 0 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  &__second-col{
+    width: 100%;
+    background: url("login_col2.jpg");
+  }
+
+  &__form-container{
+    padding-top: 80px;
+
+    label{
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1em;
+    }
+  }
+}

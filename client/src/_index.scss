@@ -1,0 +1,53 @@
+@import 'vars';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333333;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+input{
+  background-color: #f5f6f7;
+  border-radius: $small-border-radius;
+  box-shadow: inset 0.1px 0.1px 3px 0.1px rgba(0.1, 0, 0, 0.05);
+  font-size: 14px;
+  padding: 12px;
+  border: none;
+  width: 288px;
+  margin: 8px 0 16px 0;
+}
+
+input[type=submit]{
+  height: 40px;
+  color: #fafafa;
+  max-width: 120px;
+  border-radius: $small-border-radius;
+  padding: 0;
+  margin-top: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  background-color: #1456C8;
+  
+  &:hover{
+    cursor: pointer;
+  }
+  &:active{
+    opacity: 0.8;
+  }
+}
