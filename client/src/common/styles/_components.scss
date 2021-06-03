@@ -1,0 +1,19 @@
+@import '../../styles/vars';
+
+.list-window{
+  height: 200px;
+  overflow: auto;
+  padding: 8px 0;
+  width: 288px;
+  border: 0.1px solid #333333;
+  border-radius: $small-border-radius;
+
+  & li{
+    padding-left: 8px;
+  }
+
+  & li:nth-child(even){
+    background-color: beige;
+  }
+
+}

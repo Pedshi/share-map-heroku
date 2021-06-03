@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import '../styles/_userPlace.scss';
 
 import { ListWindow, renderStatusEffect } from '../../../common';
 import {  addPlaces, 
@@ -50,37 +51,39 @@ function UserPlace() {
   };
 
   return (
-    <div className="wrapper">
-      <div className="form-container">
-        {status === 'loading' || status === 'rejected' ? (
-          renderStatusEffect(status)
-        ) : (
-          <div className="flex-end">
-            <div >
-              <Link to="/place/create">
-                <button>Go To Create Place</button>
-              </Link>
-              <p>Your Saved places</p>
-              <input type="text" placeholder="Search" onChange={filterPlaces} />
-              <ListWindow listOfItems={ isSearchEmpty ? userPlaces: filteredPlaces } />
-            </div>
+    <div className="user-place">
+      <div className="user-place__form-container">
+        <div className="user-place__card">
+          {status === 'loading' || status === 'rejected' ? (
+            renderStatusEffect(status)
+          ) : (
             <div>
-              <select multiple className="h150" onChange={addToPlaces}>
-                {places.map( (place) => (
-                  <option key={place._id} value={place._id}>
-                    { place.name }
-                  </option>
-                ))}
-              </select>
-              <button onClick={addSelectedPlace}>Add to My Places</button>
+              <Link to="/place/create">
+                <p>Go To Create Place 👉</p>
+              </Link>
+              <h2>Your Saved places</h2>
+              <input type="text" placeholder="Search" onChange={filterPlaces} />
+              <div className="user-place__lists">
+                <ListWindow listOfItems={ isSearchEmpty ? userPlaces: filteredPlaces } />
+                <select multiple className="user-place__select" onChange={addToPlaces}>
+                  {places.map( (place) => (
+                    <option key={place._id} value={place._id}>
+                      { place.name }
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="user-place__add-button">    
+                <button onClick={addSelectedPlace}>Add to My Places</button>
+              </div>
             </div>
-          </div>
-        )}
-        {requestSuccess && (
-          <div>
-            <p>Place added!</p>
-          </div>
-        )}
+          )}
+          {requestSuccess && (
+            <div>
+              <p>Place added!</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,25 @@
+@import './vars';
+
+@mixin image-background($filename) {
+  background: url('./images/' + $filename);
+  background-repeat: no-repeat;
+}
+
+%card{
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px 48px;
+  box-shadow: 0px 0px 10px 10px rgba(0.1, 0, 0, 0.2);
+}
+
+%regular-button{
+  height: 40px;
+  color: #fafafa;
+  max-width: 120px;
+  border-radius: $small-border-radius;
+  padding: 0;
+  margin-top: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  background-color: $accent-color;
+}

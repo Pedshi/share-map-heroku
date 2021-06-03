@@ -1,0 +1,34 @@
+@import '../../../styles/main';
+@import '../../../styles/vars';
+
+.user-place{
+  @include image-background('login_col2.jpg');
+  min-height: 100vh;
+
+  &__form-container{
+    padding: 48px 80px;
+    margin: auto;
+  }
+
+  &__card{
+    @extend %card;
+    margin: 0 auto;
+    width: 648px;
+  }
+
+  &__lists{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__select{
+    border-radius: $small-border-radius;
+    border: 0.1px solid #333333;
+    margin-left: 48px;
+  }
+
+  &__add-button{
+    display: flex;
+    justify-content: flex-end;
+  }
+}

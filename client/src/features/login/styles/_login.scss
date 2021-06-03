@@ -1,3 +1,5 @@
+@import '../../../styles/main';
+
 
 .login{
   display: flex;
@@ -13,7 +15,7 @@
 
   &__second-col{
     width: 100%;
-    background: url("login_col2.jpg");
+    @include image-background('login_col2.jpg');
   }
 
   &__form-container{

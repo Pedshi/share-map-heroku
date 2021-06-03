@@ -1,7 +1,9 @@
+@import '../../../styles/main';
+
 
 .create-place{
-  background: url('../../login/styles/login_col2.jpg');
-  background-repeat: no-repeat;
+  @include image-background('login_col2.jpg');
+  min-height: 100vh;
 
   &__form-container{
     padding: 48px 80px;
@@ -9,10 +11,9 @@
   }
 
   &__card{
-  background: #fff;
-  border-radius: 8px;
-  padding: 48px;
-  box-shadow: 0px 0px 10px 10px rgba(0.1, 0, 0, 0.1);
+    @extend %card;
+    margin: 0 auto;
+    width: 1020px;
   }
 
   &__row{

@@ -58,7 +58,7 @@ function Place() {
       <div className="create-place__form-container">
         <div className="create-place__card">
           <Link to="/place/user">
-            <button>Go To My Places</button>
+            <p>Go To My Places 👉</p>
           </Link>
           <form onSubmit={onSubmitHandler}>
             <div className="create-place__row">
@@ -71,14 +71,16 @@ function Place() {
             </div>
             <div className="create-place__row">
             <InputWLabel labelText="Instagram Location Tag Url" value={igLocationUrl} onValueChange={setIgLocationUrl} />
-            <select onChange={e => setCategory(parseInt(e.target.value))}>
-              {categoryOptions.map( (category) => (
-                  <option key={category.value} value={category.value}>
-                    { category.label }
-                  </option>
-                )
-              )}
-            </select>
+            <div className="align-self-center">
+              <select onChange={e => setCategory(parseInt(e.target.value))}>
+                {categoryOptions.map( (category) => (
+                    <option key={category.value} value={category.value}>
+                      { category.label }
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
             </div>
             <div className="create-place__open-time">
               {Object.keys(openingHours).map( (key) => (
